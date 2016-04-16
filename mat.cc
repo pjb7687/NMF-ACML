@@ -15,13 +15,15 @@ Math Kernel Library (MKL).
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
+#ifndef _MSC_VER
+# include <unistd.h>
+#endif
 #include <math.h>
 #include <algorithm>
 
 using namespace std;
 
-#include <mkl_cblas.h>
+#include "blas.h"
 
 float ssdf(float *V, float *WH, float *B, int M, int N)
 {

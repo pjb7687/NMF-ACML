@@ -16,12 +16,16 @@ Math Kernel Library (MKL).
 #include <math.h>
 #include <string.h>
 
-#include <mkl_cblas.h>
+#include "blas.h"
 
 #include "rand.h"
 #include "timer.h"
 #include "mat.h"
 #include "nmf.h"
+
+#ifndef bzero
+#define bzero(a, b) memset(a, 0, b)
+#endif // !bzero
 
 long rng_idum;
 
@@ -162,7 +166,7 @@ float nmfssdf(float *V,
 
 	  float ssd = ssdf(Vorg, WH, B, M, N);
 
-#ifdef VERBOSE
+//#ifdef VERBOSE
 	  printf("NMF: %d SSD %.6e", i, ssd);
 
 	  if (i > 0)
@@ -172,7 +176,7 @@ float nmfssdf(float *V,
 	    }
 	  printf("\n");
 	  fflush(stdout);
-#endif
+//#endif
 
 	  if (t) t->push_back(tel);
 	  if (ssds) ssds->push_back(ssd);
@@ -212,7 +216,7 @@ float nmfssdf(float *V,
   delete [] sums;
 
   //W*H
-  cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, M, N, K, 1.0, W, K, H, N, 0.0, WH, N);
+  //cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, M, N, K, 1.0, W, K, H, N, 0.0, WH, N);
 
   return old_ssd;
 }

@@ -15,7 +15,7 @@ Math Kernel Library (MKL).
 
 #include <vector>
 
-#include <mkl_cblas.h>
+#include <acml.h>
 
 #define NMF_SSD_THRESH 0.001
 
